@@ -12,8 +12,23 @@ const App = () => {
   const [moves, setMoves] = useState(0);
   const [isLocked, setIsLocked] = useState(false);
 
+  // Shuffles an array
+  const shuffleArray = arr => {
+    const shuffled = [...arr];
+
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+
+    return shuffled;
+  }
+
   const initializeGame = () => {
-    const finalCards = cardValues.map((value, index) => {
+    const shuffled = shuffleArray(cardValues);
+
+    // Arrange the cards randomly
+    const finalCards = shuffled.map((value, index) => {
       return {
         id: index,
         value,
